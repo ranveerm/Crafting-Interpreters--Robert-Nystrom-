@@ -11,12 +11,25 @@ class MainProgram {
     let consoleIO = ConsoleIO()
     
     func mainLoop() {
-        while true {
-            consoleIO.showPrompt()
+        consoleIO.showPrompt()
+        
+        while let input = readLine() {
+            run(input)
             
-            if let input = readLine() {
-                print("Your input: \(input)")
-            }
+            consoleIO.showPrompt()
+        }
+    }
+}
+
+extension MainProgram {
+    static let exitPrompt = [":quit", ":q"]
+}
+
+extension MainProgram {
+    func run(_ input: String) {
+        switch input {
+        case _ where Self.exitPrompt.contains(input): exit(0)
+        default: consoleIO.writeMessage("Input: \(input)")
         }
     }
 }
