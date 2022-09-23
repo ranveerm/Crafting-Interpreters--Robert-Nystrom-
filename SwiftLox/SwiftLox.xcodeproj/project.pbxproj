@@ -10,6 +10,7 @@
 		A3F378F828C4356000F33047 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F378F728C4356000F33047 /* main.swift */; };
 		A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
+		A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* TokenType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		A3F378F728C4356000F33047 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A3F3790428C43B3D00F33047 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
 		A3F3790828C43B7700F33047 /* MainProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProgram.swift; sourceTree = "<group>"; };
+		A3F3790A28CA200D00F33047 /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A37381CE28DDB163006B4B72 /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				A3F3790A28CA200D00F33047 /* TokenType.swift */,
+			);
+			path = Tokens;
+			sourceTree = "<group>";
+		};
 		A3F378EB28C4356000F33047 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 				A3F378F728C4356000F33047 /* main.swift */,
 				A3F3790428C43B3D00F33047 /* ConsoleIO.swift */,
 				A3F3790828C43B7700F33047 /* MainProgram.swift */,
+				A37381CE28DDB163006B4B72 /* Tokens */,
 			);
 			path = SwiftLox;
 			sourceTree = "<group>";
@@ -127,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */,
+				A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */,
 				A3F378F828C4356000F33047 /* main.swift in Sources */,
 				A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */,
 			);
