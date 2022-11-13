@@ -46,13 +46,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A37381CE28DDB163006B4B72 /* Tokens */ = {
+		A37381CE28DDB163006B4B72 /* Scanning */ = {
 			isa = PBXGroup;
 			children = (
 				A3F3790A28CA200D00F33047 /* TokenType.swift */,
 				A37381CF28DDB186006B4B72 /* Token.swift */,
 			);
-			path = Tokens;
+			path = Scanning;
 			sourceTree = "<group>";
 		};
 		A3F378EB28C4356000F33047 = {
@@ -77,7 +77,7 @@
 				A3F378F728C4356000F33047 /* main.swift */,
 				A3F3790428C43B3D00F33047 /* ConsoleIO.swift */,
 				A3F3790828C43B7700F33047 /* MainProgram.swift */,
-				A37381CE28DDB163006B4B72 /* Tokens */,
+				A37381CE28DDB163006B4B72 /* Scanning */,
 			);
 			path = SwiftLox;
 			sourceTree = "<group>";
