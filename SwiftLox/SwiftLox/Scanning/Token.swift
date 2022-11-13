@@ -10,7 +10,7 @@ import Foundation
 struct Token {
     let tokenType: TokenType
     let lexme: String
-    let literal: String
+    let literal: String?
     let line: Int
 }
 
