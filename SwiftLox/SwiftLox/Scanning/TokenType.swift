@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TokenType {
+protocol TokenType: CustomStringConvertible {
     var rawValue: String { get }
 }
 
@@ -28,6 +28,22 @@ enum SingleCharToken: String, CaseIterable, TokenType {
     case plus = "+"
     case star = "*"
     case semicolon = ";"
+    
+    var description: String {
+        switch self {
+            
+        case .leftParenthesis: return "Left Parenthesis"
+        case .rightParenthesis: return "Right Parenthesis"
+        case .leftBrace: return "Left Brace"
+        case .rightBrace: return "Right Brace"
+        case .comma: return "Comma"
+        case .dot: return "Dot"
+        case .minus: return "Minus"
+        case .plus: return "Plus"
+        case .star: return "Star"
+        case .semicolon: return "Semicolon"
+        }
+    }
 }
   
 // MARK: Multi-character
@@ -47,6 +63,16 @@ enum PotentiallyMuliCharOperatorToken: String, CaseIterable, TokenType {
         case .less: return .lessEqual
         }
     }
+    
+    var description: String {
+        switch self {
+            
+        case .bang: return "Boolean Not"
+        case .equal: return "Assignment"
+        case .greater: return "Greater than"
+        case .less: return "Less than"
+        }
+    }
 }
 
 enum MultiCharOperatorToken: String, CaseIterable, TokenType {
@@ -64,15 +90,32 @@ enum MultiCharOperatorToken: String, CaseIterable, TokenType {
         case .lessEqual: return .less
         }
     }
+    
+    var description: String {
+        switch self {
+        case .bangEqual: return "Not Equal"
+        case .equalEqual: return "Boolean Equality"
+        case .greaterEqual: return "Greater than or equal to"
+        case .lessEqual: return "Less than or equal to"
+        }
+    }
 }
 
 enum SpecialOperatorToken: String, CaseIterable, TokenType {
     case slash = "/"
+    
+    var description: String {
+        switch self {
+        case .slash: return "Slash"
+        }
+    }
 }
 
 // MARK: Literals
 enum Literals: String, CaseIterable, TokenType {
     case identifier, string, number
+    
+    var description: String { self.rawValue.capitalized }
 }
 
 
@@ -90,5 +133,23 @@ enum Keywords: String, CaseIterable, TokenType {
     case `var`
     case fun
     
-    case eof
+    // TODO: Provide more appropriate description values
+    var description: String { self.rawValue.capitalized }
+}
+
+enum SpecialToken: String, CaseIterable, TokenType {
+    case eof = "EOF"
+    
+    var description: String {
+        switch self {
+        case .eof: return "End of File"
+        }
+    }
+}
+
+enum NonTokenInputs: String {
+    case space = " "
+    case carriageReturn = "\r"
+    case tab = "\t"
+    case newLine = "\n"
 }

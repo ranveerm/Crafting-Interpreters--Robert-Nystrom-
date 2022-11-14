@@ -16,6 +16,6 @@ struct Token {
 
 extension Token: CustomStringConvertible {
     var description: String {
-        tokenType.rawValue + " " + lexme + " " + literal
+        "[\(line)] " + tokenType.description + "\t\t" + lexme + " " + (literal ?? "")
     }
 }
