@@ -50,10 +50,12 @@ extension MainProgram {
 extension MainProgram {
     enum ErrorType: CustomStringConvertible, Swift.Error {
         case mock
+        case unexpectedChar
         
         var description: String {
             switch self {
             case .mock: return "Mock Error"
+            case .unexpectedChar: return "Unexpected Character"
             }
         }
     }
