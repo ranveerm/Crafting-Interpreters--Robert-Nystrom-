@@ -33,7 +33,16 @@ extension MainProgram {
     func run(_ input: String) {
         switch input {
         case _ where Self.exitPrompt.contains(input): exit(0)
-        default: consoleIO.writeMessage("Input: \(input)")
+        default:
+            consoleIO.writeMessage("Input: \(input)")
+            
+            consoleIO.writeMessage("Tokens:")
+            let scanner = Scanner(input)
+            do {
+                let tokens = try scanner.scanForTokens()
+                consoleIO.writeMessage(tokens.reduce("") { $0 + "\n\t" + $1.description })
+            }
+            catch { hadError = true }
         }
     }
 }
