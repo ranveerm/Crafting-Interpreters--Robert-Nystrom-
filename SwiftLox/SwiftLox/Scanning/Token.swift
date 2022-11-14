@@ -22,6 +22,6 @@ extension Token: Equatable {
 
 extension Token: CustomStringConvertible {
     var description: String {
-        "[\(line)] " + tokenType.description + "\t\t" + lexme + " " + (literal ?? "")
+        "[\(line)] " + tokenType.description + "\t\t" + lexme + "\t\t" + (literal ?? "")
     }
 }

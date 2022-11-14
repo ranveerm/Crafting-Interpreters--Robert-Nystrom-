@@ -113,9 +113,17 @@ enum SpecialOperatorToken: String, CaseIterable, TokenType {
 
 // MARK: Literals
 enum Literals: String, CaseIterable, TokenType {
-    case identifier, string, number
+    case identifier
+    case string = "\""
+    case number
     
-    var description: String { self.rawValue.capitalized }
+    var description: String {
+        switch self {
+        case .identifier: return "Identifier"
+        case .string: return "String"
+        case .number: return "Number"
+        }
+    }
 }
 
 

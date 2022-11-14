@@ -19,12 +19,16 @@ final class ScannerTests: XCTestCase {
     
     func test_scanForTokenBasic() throws {
         /// Given
+        let mockLiteral = "Mock"
         let inputText = """
 + - {
 *
 < == (
 // This is a comment
 / \t \n
+"\(mockLiteral)"
+"\(mockLiteral)
+"
 """
         let sut = Scanner(inputText)
         let expectedTokens: [Token] = [
@@ -36,7 +40,9 @@ final class ScannerTests: XCTestCase {
             Token(tokenType: MultiCharOperatorToken.equalEqual, lexme: "==", literal: nil, line: 3),
             Token(tokenType: SingleCharToken.leftParenthesis, lexme: "(", literal: nil, line: 3),
             Token(tokenType: SpecialOperatorToken.slash, lexme: "/", literal: nil, line: 5),
-            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 6)
+            Token(tokenType: Literals.string, lexme: "\"\(mockLiteral)\"", literal: mockLiteral, line: 7),
+            Token(tokenType: Literals.string, lexme: "\"\(mockLiteral)\n\"", literal: mockLiteral + "\n", line: 8),
+            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 9)
         ]
         
         /// When

@@ -63,7 +63,7 @@ extension Scanner {
             commentLoop: while !isAtEnd() {
                     switch peekAtNextChar() {
                     /// Newline escapes loop and and enters the "non-Token" branch to implement new line logic
-                    case "\n", "\0":
+                    case NonTokenInputs.newLine.rawValue, "\0":
                         startIndex = currentIndex
                         break commentLoop
                     default: advanceCurrentIndex()
@@ -75,8 +75,27 @@ extension Scanner {
             case .newLine: line += 1
             default: break
             }
-        }
-        else { throw MainProgram.ErrorType.unexpectedChar }
+        } else if currentChar == Literals.string.rawValue {
+            /// String Literals
+            var newLinesInLiteral = 0
+            
+            /// Opening `"`
+            advanceCurrentIndex()
+            while !isAtEnd() && peekAtNextChar() != Literals.string.rawValue {
+                if peekAtNextChar() == NonTokenInputs.newLine.rawValue { newLinesInLiteral += 1 }
+                advanceCurrentIndex()
+            }
+            
+            guard !isAtEnd() else { throw MainProgram.ErrorType.unterminatedString }
+            
+            /// Closing `"`
+            advanceCurrentIndex()
+            let literalStartIndex = source.index(after: startIndex)
+            let stringLiteral = source[literalStartIndex..<currentIndex]
+            addToken(type: Literals.string, literal: String(stringLiteral))
+            
+            line += newLinesInLiteral
+        } else { throw MainProgram.ErrorType.unexpectedChar }
     }
     
     private func addToken(type tokenType: TokenType) {
