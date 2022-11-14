@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355E2B02921FB88007FF810 /* ScannerTests.swift */; };
+		A355E2B22921FB94007FF810 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD51572920BE6D00C4D488 /* Scanner.swift */; };
+		A355E2B32921FBD8007FF810 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
+		A355E2B42921FBDB007FF810 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* TokenType.swift */; };
+		A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
+		A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A37381D028DDB186006B4B72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
 		A3F378F828C4356000F33047 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F378F728C4356000F33047 /* main.swift */; };
 		A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
@@ -28,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A355E2B02921FB88007FF810 /* ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTests.swift; sourceTree = "<group>"; };
 		A37381CF28DDB186006B4B72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A3F378F428C4356000F33047 /* SwiftLox */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftLox; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F378F728C4356000F33047 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -38,6 +46,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A355E2A62921FB79007FF810 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3F378F128C4356000F33047 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A355E2AA2921FB79007FF810 /* SwiftLoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				A355E2B02921FB88007FF810 /* ScannerTests.swift */,
+			);
+			path = SwiftLoxTests;
+			sourceTree = "<group>";
+		};
 		A37381CE28DDB163006B4B72 /* Scanning */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				A3F378F628C4356000F33047 /* SwiftLox */,
+				A355E2AA2921FB79007FF810 /* SwiftLoxTests */,
 				A3F378F528C4356000F33047 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				A3F378F428C4356000F33047 /* SwiftLox */,
+				A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +113,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A355E2A82921FB79007FF810 /* SwiftLoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A355E2AD2921FB79007FF810 /* Build configuration list for PBXNativeTarget "SwiftLoxTests" */;
+			buildPhases = (
+				A355E2A52921FB79007FF810 /* Sources */,
+				A355E2A62921FB79007FF810 /* Frameworks */,
+				A355E2A72921FB79007FF810 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftLoxTests;
+			productName = SwiftLoxTests;
+			productReference = A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A3F378F328C4356000F33047 /* SwiftLox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3F378FB28C4356000F33047 /* Build configuration list for PBXNativeTarget "SwiftLox" */;
@@ -112,9 +154,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					A355E2A82921FB79007FF810 = {
+						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
+					};
 					A3F378F328C4356000F33047 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -134,11 +180,35 @@
 			projectRoot = "";
 			targets = (
 				A3F378F328C4356000F33047 /* SwiftLox */,
+				A355E2A82921FB79007FF810 /* SwiftLoxTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A355E2A72921FB79007FF810 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		A355E2A52921FB79007FF810 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A355E2B32921FBD8007FF810 /* Token.swift in Sources */,
+				A355E2B42921FBDB007FF810 /* TokenType.swift in Sources */,
+				A355E2B22921FB94007FF810 /* Scanner.swift in Sources */,
+				A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */,
+				A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */,
+				A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3F378F028C4356000F33047 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +225,53 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		A355E2AE2921FB79007FF810 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 29F59849NR;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranveer.SwiftLoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A355E2AF2921FB79007FF810 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 29F59849NR;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranveer.SwiftLoxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		A3F378F928C4356000F33047 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -299,6 +416,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A355E2AD2921FB79007FF810 /* Build configuration list for PBXNativeTarget "SwiftLoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A355E2AE2921FB79007FF810 /* Debug */,
+				A355E2AF2921FB79007FF810 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A3F378EF28C4356000F33047 /* Build configuration list for PBXProject "SwiftLox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
