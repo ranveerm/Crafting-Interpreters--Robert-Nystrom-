@@ -86,7 +86,7 @@ extension Scanner {
                 advanceCurrentIndex()
             }
             
-            guard !isAtEnd() else { throw MainProgram.ErrorType.unterminatedString }
+            guard !isAtEnd() else { throw MainProgram.ErrorType.unterminatedString(line) }
             
             /// Closing `"`
             advanceCurrentIndex()

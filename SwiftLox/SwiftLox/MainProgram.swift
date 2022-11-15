@@ -36,37 +36,50 @@ extension MainProgram {
         default:
             consoleIO.writeMessage("Input: \(input)")
             
-            consoleIO.writeMessage("Tokens:")
             let scanner = Scanner(input)
             do {
                 let tokens = try scanner.scanForTokens()
+                consoleIO.writeMessage("Tokens:")
                 consoleIO.writeMessage(tokens.reduce("") { $0 + "\n\t" + $1.description })
+            } catch {
+                hadError = true
+                if let error = error as? ErrorType {
+                    reportError(line: error.reportedErrorLine, errorType: error)
+                } else { consoleIO.writeMessage("Unknown error", to: .error) }
             }
-            catch { hadError = true }
         }
     }
 }
 
 // MARK: Helper Methods
 extension MainProgram {
-    func reportError(line: Int, errorType: ErrorType, message: String) {
-        consoleIO.writeMessage("[line \(line)] \(errorType): message", to: .error)
+    func reportError(line: Int, errorType: ErrorType) {
+        consoleIO.writeMessage("[line \(line)] \(errorType.localizedDescription)", to: .error)
         hadError = true
     }
 }
 
 // MARK: Nested Types
 extension MainProgram {
-    enum ErrorType: CustomStringConvertible, Swift.Error {
+    enum ErrorType: Error {
         case mock
-        case unexpectedChar
-        case unterminatedString
+        case unexpectedChar(Int)
+        case unterminatedString(Int)
+        case unableToDetermineNumber(Int)
         
-        var description: String {
+        var localizedDescription: String {
             switch self {
             case .mock: return "Mock Error"
             case .unexpectedChar: return "Unexpected Character"
             case .unterminatedString: return "Unterminated String"
+            case .unableToDetermineNumber: return "Unable to determine input number"
+            }
+        }
+        
+        var reportedErrorLine: Int {
+            switch self {
+            case .unexpectedChar(let line), .unterminatedString(let line), .unableToDetermineNumber(let line): return line
+            case .mock: return 0
             }
         }
     }
