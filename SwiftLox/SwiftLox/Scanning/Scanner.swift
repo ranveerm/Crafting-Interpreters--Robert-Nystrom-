@@ -44,24 +44,22 @@ extension Scanner {
     }
     
     private func scanToken() throws {
-        let currentChar = String(source[currentIndex])
-        
         /*:
          Note: Alternative pattern- `case _ where SingleCharToken.rawTokens.contains(currentChar):`
          */
-        if let tokenType = SingleCharToken(rawValue: currentChar) {
+        if let tokenType = SingleCharToken(rawValue: currentChar.asString) {
             addToken(type: tokenType)
-        } else if let tokenType = PotentiallyMuliCharOperatorToken(rawValue: currentChar) {
+        } else if let tokenType = PotentiallyMuliCharOperatorToken(rawValue: currentChar.asString) {
             if nextCharMatches(PotentiallyMuliCharOperatorToken.succeedingTokenRawForMultiCharOperator) {
                 advanceCurrentIndex()
                 addToken(type: tokenType.matchingMultiCharOperator)
             } else { addToken(type: tokenType) }
-        } else if let tokenType = SpecialOperatorToken(rawValue: currentChar) {
+        } else if let tokenType = SpecialOperatorToken(rawValue: currentChar.asString) {
             /// Comment
             if nextCharMatches(SpecialOperatorToken.slash.rawValue) {
                 /// Note that while `isAtEnd` is checked prior to invoking `scanToken` in `scanForTokens`, the below loop also advances `currentIndex`, for which reason this condition needs to be evaluated again.
             commentLoop: while !isAtEnd() {
-                    switch peekAtNextChar() {
+                    switch peekAtNextChar().asString {
                     /// Newline escapes loop and and enters the "non-Token" branch to implement new line logic
                     case NonTokenInputs.newLine.rawValue, "\0":
                         startIndex = currentIndex
@@ -70,19 +68,19 @@ extension Scanner {
                     }
                 }
             } else { addToken(type: tokenType) }
-        } else if let nonToken = NonTokenInputs(rawValue: currentChar) {
+        } else if let nonToken = NonTokenInputs(rawValue: currentChar.asString) {
             switch nonToken {
             case .newLine: line += 1
             default: break
             }
-        } else if currentChar == Literals.string.rawValue {
+        } else if currentChar.asString == Literals.string.rawValue {
             /// String Literals
             var newLinesInLiteral = 0
             
             /// Opening `"`
             advanceCurrentIndex()
-            while !isAtEnd() && peekAtNextChar() != Literals.string.rawValue {
-                if peekAtNextChar() == NonTokenInputs.newLine.rawValue { newLinesInLiteral += 1 }
+            while !isAtEnd() && peekAtNextChar().asString != Literals.string.rawValue {
+                if peekAtNextChar().asString == NonTokenInputs.newLine.rawValue { newLinesInLiteral += 1 }
                 advanceCurrentIndex()
             }
             
@@ -98,7 +96,7 @@ extension Scanner {
         } else if currentChar.isNumber {
             /// Numeric Literals
             advanceUntilNextCharIsNotDigit()
-            if peekAtNextChar() == SingleCharToken.dot.rawValue {
+            if peekAtNextChar().asString == SingleCharToken.dot.rawValue {
                 advanceCurrentIndex()
                 /// Require at least 1 number after decimal point
                 guard isNextCharANumber else { throw MainProgram.ErrorType.unexpectedChar(line)  }
@@ -125,17 +123,23 @@ extension Scanner {
     private func nextCharMatches(_ inputChar: String) -> Bool {
         if isAtEnd() { return false }
         
-        return peekAtNextChar() == inputChar
+        return peekAtNextChar().asString == inputChar
     }
     
-    private func peekAtNextChar() -> String {
+    private func peekAtNextChar() -> Character {
         if nextIndex == source.endIndex { return "\0" }
-        else { return String(source[nextIndex]) }
+        else { return source[nextIndex] }
     }
     
     private func isAtEnd() -> Bool { currentIndex == source.endIndex }
     private func advanceCurrentIndex() { currentIndex = nextIndex }
     private func advanceUntilNextCharIsNotDigit() { while !isAtEnd() && isNextCharANumber { advanceCurrentIndex() } }
     private var nextIndex: String.Index { source.index(after: currentIndex) }
-    private var isNextCharANumber: Bool { Character(peekAtNextChar()).isNumber }
+    private var isNextCharANumber: Bool { peekAtNextChar().isNumber }
+    private var isCurrentCharANumber: Bool { currentChar.isNumber }
+    private var currentChar: Character { source[currentIndex] }
+}
+
+fileprivate extension Character {
+    var asString: String { String(self) }
 }
