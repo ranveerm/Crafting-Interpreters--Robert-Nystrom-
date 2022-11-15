@@ -29,6 +29,7 @@ final class ScannerTests: XCTestCase {
 "\(mockLiteral)"
 "\(mockLiteral)
 "
+1 12 12.2
 """
         let sut = Scanner(inputText)
         let expectedTokens: [Token] = [
@@ -42,7 +43,10 @@ final class ScannerTests: XCTestCase {
             Token(tokenType: SpecialOperatorToken.slash, lexme: "/", literal: nil, line: 5),
             Token(tokenType: Literals.string, lexme: "\"\(mockLiteral)\"", literal: mockLiteral, line: 7),
             Token(tokenType: Literals.string, lexme: "\"\(mockLiteral)\n\"", literal: mockLiteral + "\n", line: 8),
-            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 9)
+            Token(tokenType: Literals.number, lexme: "1", literal: "1", line: 10),
+            Token(tokenType: Literals.number, lexme: "12", literal: "12", line: 10),
+            Token(tokenType: Literals.number, lexme: "12.2", literal: "12.2", line: 10),
+            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 10)
         ]
         
         /// When

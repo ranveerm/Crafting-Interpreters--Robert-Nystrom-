@@ -95,7 +95,21 @@ extension Scanner {
             addToken(type: Literals.string, literal: String(stringLiteral))
             
             line += newLinesInLiteral
-        } else { throw MainProgram.ErrorType.unexpectedChar }
+        } else if currentChar.isNumber {
+            /// Numeric Literals
+            advanceUntilNextCharIsNotDigit()
+            if peekAtNextChar() == SingleCharToken.dot.rawValue {
+                advanceCurrentIndex()
+                /// Require at least 1 number after decimal point
+                guard isNextCharANumber else { throw MainProgram.ErrorType.unexpectedChar(line)  }
+                advanceUntilNextCharIsNotDigit()
+            }
+            
+            let numberLiteral = String(source[startIndex...currentIndex])
+            /// Pre-emptively checking if literal can be converted to a double precision floating point
+            if Double(numberLiteral) == nil { throw MainProgram.ErrorType.unableToDetermineNumber(line) }
+            addToken(type: Literals.number, literal: numberLiteral)
+        } else { throw MainProgram.ErrorType.unexpectedChar(line) }
     }
     
     private func addToken(type tokenType: TokenType) {
@@ -121,5 +135,7 @@ extension Scanner {
     
     private func isAtEnd() -> Bool { currentIndex == source.endIndex }
     private func advanceCurrentIndex() { currentIndex = nextIndex }
+    private func advanceUntilNextCharIsNotDigit() { while !isAtEnd() && isNextCharANumber { advanceCurrentIndex() } }
     private var nextIndex: String.Index { source.index(after: currentIndex) }
+    private var isNextCharANumber: Bool { Character(peekAtNextChar()).isNumber }
 }
