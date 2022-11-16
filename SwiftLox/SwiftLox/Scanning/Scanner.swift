@@ -103,10 +103,14 @@ extension Scanner {
                 advanceUntilNextCharIsNotDigit()
             }
             
-            let numberLiteral = String(source[startIndex...currentIndex])
+            let numberLiteral = literalFromIndicies
             /// Pre-emptively checking if literal can be converted to a double precision floating point
             if Double(numberLiteral) == nil { throw MainProgram.ErrorType.unableToDetermineNumber(line) }
             addToken(type: Literals.number, literal: numberLiteral)
+        } else if isCharStartOfAnIdentifier(currentChar) {
+            /// Identifiers- matched using **maximal munch principle**, to ensure it recieves preference over keywords
+            advanceUntilNextCharIsNotAnIdentifier()
+            addToken(type: Literals.identifier, literal: literalFromIndicies)
         } else { throw MainProgram.ErrorType.unexpectedChar(line) }
     }
     
@@ -115,8 +119,7 @@ extension Scanner {
     }
     
     private func addToken(type tokenType: TokenType, literal: String?) {
-        let lexme = source[startIndex...currentIndex]
-        let tokenToAdd = Token(tokenType: tokenType, lexme: String(lexme), literal: literal, line: line)
+        let tokenToAdd = Token(tokenType: tokenType, lexme: literalFromIndicies, literal: literal, line: line)
         tokens.append(tokenToAdd)
     }
     
@@ -131,6 +134,12 @@ extension Scanner {
         else { return source[nextIndex] }
     }
     
+    
+    private func isCharStartOfAnIdentifier(_ inputCharacter: Character) -> Bool {
+        /// The start of an identiifier can be part of the specified alphabet or be `_`
+        isAlphabet(inputCharacter) || inputCharacter == Character("_")
+    }
+    
     private func isAtEnd() -> Bool { currentIndex == source.endIndex }
     private func advanceCurrentIndex() { currentIndex = nextIndex }
     private func advanceUntilNextCharIsNotDigit() { while !isAtEnd() && isNextCharANumber { advanceCurrentIndex() } }
@@ -138,6 +147,11 @@ extension Scanner {
     private var isNextCharANumber: Bool { peekAtNextChar().isNumber }
     private var isCurrentCharANumber: Bool { currentChar.isNumber }
     private var currentChar: Character { source[currentIndex] }
+    private var alphabetCharacterRegex: Regex<Substring> { /[a-zA-Z]/ }
+    private func isAlphabet(_ inputCharacter: Character) -> Bool { !inputCharacter.asString.matches(of: alphabetCharacterRegex).isEmpty }
+    private func isNextCharPartOfAnIdentifier() -> Bool { isNextCharANumber || isCharStartOfAnIdentifier(peekAtNextChar()) }
+    private func advanceUntilNextCharIsNotAnIdentifier() { while !isAtEnd() && isNextCharPartOfAnIdentifier() { advanceCurrentIndex() } }
+    private var literalFromIndicies: String { String(source[startIndex...currentIndex]) }
 }
 
 fileprivate extension Character {

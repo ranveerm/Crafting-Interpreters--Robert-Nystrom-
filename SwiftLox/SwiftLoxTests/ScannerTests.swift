@@ -20,6 +20,7 @@ final class ScannerTests: XCTestCase {
     func test_scanForTokenBasic() throws {
         /// Given
         let mockLiteral = "Mock"
+        let mockIdentifier = "mockIdentifier"
         let inputText = """
 + - {
 *
@@ -30,6 +31,7 @@ final class ScannerTests: XCTestCase {
 "\(mockLiteral)
 "
 1 12 12.2
+\(mockIdentifier) _\(mockIdentifier)
 """
         let sut = Scanner(inputText)
         let expectedTokens: [Token] = [
@@ -46,7 +48,9 @@ final class ScannerTests: XCTestCase {
             Token(tokenType: Literals.number, lexme: "1", literal: "1", line: 10),
             Token(tokenType: Literals.number, lexme: "12", literal: "12", line: 10),
             Token(tokenType: Literals.number, lexme: "12.2", literal: "12.2", line: 10),
-            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 10)
+            Token(tokenType: Literals.identifier, lexme: "\(mockIdentifier)", literal: "\(mockIdentifier)", line: 11),
+            Token(tokenType: Literals.identifier, lexme: "_\(mockIdentifier)", literal: "_\(mockIdentifier)", line: 11),
+            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 11)
         ]
         
         /// When
