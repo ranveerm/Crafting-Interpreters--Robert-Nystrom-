@@ -32,6 +32,7 @@ final class ScannerTests: XCTestCase {
 "
 1 12 12.2
 \(mockIdentifier) _\(mockIdentifier)
+if \(mockIdentifier.uppercased()) ; else !
 """
         let sut = Scanner(inputText)
         let expectedTokens: [Token] = [
@@ -50,7 +51,12 @@ final class ScannerTests: XCTestCase {
             Token(tokenType: Literals.number, lexme: "12.2", literal: "12.2", line: 10),
             Token(tokenType: Literals.identifier, lexme: "\(mockIdentifier)", literal: "\(mockIdentifier)", line: 11),
             Token(tokenType: Literals.identifier, lexme: "_\(mockIdentifier)", literal: "_\(mockIdentifier)", line: 11),
-            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 11)
+            Token(tokenType: Keyword.if, lexme: "if", literal: nil, line: 12),
+            Token(tokenType: Literals.identifier, lexme: "\(mockIdentifier.uppercased())", literal: "\(mockIdentifier.uppercased())", line: 12),
+            Token(tokenType: SingleCharToken.semicolon, lexme: ";", literal: nil, line: 12),
+            Token(tokenType: Keyword.else, lexme: "else", literal: nil, line: 12),
+            Token(tokenType: PotentiallyMuliCharOperatorToken.bang, lexme: "!", literal: nil, line: 12),
+            Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: 12)
         ]
         
         /// When

@@ -110,7 +110,8 @@ extension Scanner {
         } else if isCharStartOfAnIdentifier(currentChar) {
             /// Identifiers- matched using **maximal munch principle**, to ensure it recieves preference over keywords
             advanceUntilNextCharIsNotAnIdentifier()
-            addToken(type: Literals.identifier, literal: literalFromIndicies)
+            if let keyword = keywordFromIndicies { addToken(type: keyword) }
+            else { addToken(type: Literals.identifier, literal: literalFromIndicies) }
         } else { throw MainProgram.ErrorType.unexpectedChar(line) }
     }
     
@@ -152,6 +153,7 @@ extension Scanner {
     private func isNextCharPartOfAnIdentifier() -> Bool { isNextCharANumber || isCharStartOfAnIdentifier(peekAtNextChar()) }
     private func advanceUntilNextCharIsNotAnIdentifier() { while !isAtEnd() && isNextCharPartOfAnIdentifier() { advanceCurrentIndex() } }
     private var literalFromIndicies: String { String(source[startIndex...currentIndex]) }
+    private var keywordFromIndicies: Keyword? { Keyword(rawValue: literalFromIndicies) }
 }
 
 fileprivate extension Character {

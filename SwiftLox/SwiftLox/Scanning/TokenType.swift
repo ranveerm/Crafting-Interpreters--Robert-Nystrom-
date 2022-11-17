@@ -127,7 +127,7 @@ enum Literals: String, CaseIterable, TokenType {
 }
 
 
-enum Keywords: String, CaseIterable, TokenType {
+enum Keyword: String, CaseIterable, TokenType {
     // MARK: Keywords
     case and, or
     case `if`, `else`
@@ -142,7 +142,7 @@ enum Keywords: String, CaseIterable, TokenType {
     case fun
     
     // TODO: Provide more appropriate description values
-    var description: String { self.rawValue.capitalized }
+    var description: String { self.rawValue.uppercased() }
 }
 
 enum SpecialToken: String, CaseIterable, TokenType {
