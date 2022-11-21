@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A30B7818292AF356002CD1BF /* Expr.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B7817292AF356002CD1BF /* Expr.swift */; };
 		A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355E2B02921FB88007FF810 /* ScannerTests.swift */; };
 		A355E2B22921FB94007FF810 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD51572920BE6D00C4D488 /* Scanner.swift */; };
 		A355E2B32921FBD8007FF810 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A30B7817292AF356002CD1BF /* Expr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expr.swift; sourceTree = "<group>"; };
 		A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A355E2B02921FB88007FF810 /* ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTests.swift; sourceTree = "<group>"; };
 		A37381CF28DDB186006B4B72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A30B7816292AF334002CD1BF /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				A30B7817292AF356002CD1BF /* Expr.swift */,
+			);
+			path = Parsing;
+			sourceTree = "<group>";
+		};
 		A355E2AA2921FB79007FF810 /* SwiftLoxTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +116,7 @@
 				A3F3790428C43B3D00F33047 /* ConsoleIO.swift */,
 				A3F3790828C43B7700F33047 /* MainProgram.swift */,
 				A37381CE28DDB163006B4B72 /* Scanning */,
+				A30B7816292AF334002CD1BF /* Parsing */,
 			);
 			path = SwiftLox;
 			sourceTree = "<group>";
@@ -216,6 +227,7 @@
 				A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */,
 				A37381D028DDB186006B4B72 /* Token.swift in Sources */,
 				A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */,
+				A30B7818292AF356002CD1BF /* Expr.swift in Sources */,
 				A3F378F828C4356000F33047 /* main.swift in Sources */,
 				A3FD51582920BE6D00C4D488 /* Scanner.swift in Sources */,
 				A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */,
@@ -323,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -378,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
