@@ -18,21 +18,20 @@ protocol Expr {
 // MARK: Grammar
 /*:
  # Grammar
- expression     → literal
-                | unary
-                | binary
-                | grouping ;
-
- literal        → NUMBER | STRING | "true" | "false" | "nil" ;
- grouping       → "(" expression ")" ;
- unary          → ( "-" | "!" ) expression ;
- binary         → expression operator expression ;
- operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
-                | "+"  | "-"  | "*" | "/" ;
+ expression     → equality ;
+ equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+ comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+ term           → factor ( ( "-" | "+" ) factor )* ;
+ factor         → unary ( ( "/" | "*" ) unary )* ;
+ unary          → ( "!" | "-" ) unary
+                | primary ;
+ primary        → NUMBER | STRING | "true" | "false" | "nil"
+                | "(" expression ")" ;
  
  # Notes
  - CAPITALISED terminals are single lexme whose representation may vary (eg. NUMBER can be 42, 1, etc.)
- - Recursive (eg. `binary` production contains `expression`, which can again contain `binary`)
+ - Recursive (eg. `unary` production contains `expression`, which can again contain `unary`)
+ - The grammar accounts for precedence (production can only match at current precedence level or those that are higher) and associativity (left-associative)
  */
 
 // MARK: Concrete Types
