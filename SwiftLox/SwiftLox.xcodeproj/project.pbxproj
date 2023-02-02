@@ -16,6 +16,11 @@
 		A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A37381D028DDB186006B4B72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
 		A39F53F2298A5D2E006A7ACF /* ExprVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */; };
+		A39F53F5298B1A1C006A7ACF /* ASTPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F4298B1A1C006A7ACF /* ASTPrinter.swift */; };
+		A39F53F7298B8AEB006A7ACF /* ASTPrinterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F6298B8AEB006A7ACF /* ASTPrinterTests.swift */; };
+		A39F53F8298B8C04006A7ACF /* ASTPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F4298B1A1C006A7ACF /* ASTPrinter.swift */; };
+		A39F53F9298B8C07006A7ACF /* ExprVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */; };
+		A39F53FA298B8C0C006A7ACF /* Expr.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B7817292AF356002CD1BF /* Expr.swift */; };
 		A3F378F828C4356000F33047 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F378F728C4356000F33047 /* main.swift */; };
 		A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
@@ -41,6 +46,8 @@
 		A355E2B02921FB88007FF810 /* ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTests.swift; sourceTree = "<group>"; };
 		A37381CF28DDB186006B4B72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExprVisitor.swift; sourceTree = "<group>"; };
+		A39F53F4298B1A1C006A7ACF /* ASTPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTPrinter.swift; sourceTree = "<group>"; };
+		A39F53F6298B8AEB006A7ACF /* ASTPrinterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTPrinterTests.swift; sourceTree = "<group>"; };
 		A3F378F428C4356000F33047 /* SwiftLox */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftLox; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F378F728C4356000F33047 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A3F3790428C43B3D00F33047 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				A30B7817292AF356002CD1BF /* Expr.swift */,
+				A39F53F3298B19BC006A7ACF /* Visitor Pattern */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -79,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				A355E2B02921FB88007FF810 /* ScannerTests.swift */,
+				A39F53F6298B8AEB006A7ACF /* ASTPrinterTests.swift */,
 			);
 			path = SwiftLoxTests;
 			sourceTree = "<group>";
@@ -91,6 +100,15 @@
 				A3FD51572920BE6D00C4D488 /* Scanner.swift */,
 			);
 			path = Scanning;
+			sourceTree = "<group>";
+		};
+		A39F53F3298B19BC006A7ACF /* Visitor Pattern */ = {
+			isa = PBXGroup;
+			children = (
+				A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */,
+				A39F53F4298B1A1C006A7ACF /* ASTPrinter.swift */,
+			);
+			path = "Visitor Pattern";
 			sourceTree = "<group>";
 		};
 		A3F378EB28C4356000F33047 = {
@@ -213,12 +231,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A39F53FA298B8C0C006A7ACF /* Expr.swift in Sources */,
 				A355E2B32921FBD8007FF810 /* Token.swift in Sources */,
 				A355E2B42921FBDB007FF810 /* TokenType.swift in Sources */,
 				A355E2B22921FB94007FF810 /* Scanner.swift in Sources */,
 				A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */,
 				A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */,
 				A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */,
+				A39F53F7298B8AEB006A7ACF /* ASTPrinterTests.swift in Sources */,
+				A39F53F8298B8C04006A7ACF /* ASTPrinter.swift in Sources */,
 				A39F53F9298B8C07006A7ACF /* ExprVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,7 +252,9 @@
 				A37381D028DDB186006B4B72 /* Token.swift in Sources */,
 				A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */,
 				A30B7818292AF356002CD1BF /* Expr.swift in Sources */,
+				A39F53F5298B1A1C006A7ACF /* ASTPrinter.swift in Sources */,
 				A3F378F828C4356000F33047 /* main.swift in Sources */,
+				A39F53F2298A5D2E006A7ACF /* ExprVisitor.swift in Sources */,
 				A3FD51582920BE6D00C4D488 /* Scanner.swift in Sources */,
 				A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */,
 			);
