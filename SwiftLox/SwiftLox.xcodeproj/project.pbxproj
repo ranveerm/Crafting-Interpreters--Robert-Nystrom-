@@ -15,6 +15,7 @@
 		A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
 		A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A37381D028DDB186006B4B72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
+		A39F53F2298A5D2E006A7ACF /* ExprVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */; };
 		A3F378F828C4356000F33047 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F378F728C4356000F33047 /* main.swift */; };
 		A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
@@ -39,6 +40,7 @@
 		A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A355E2B02921FB88007FF810 /* ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTests.swift; sourceTree = "<group>"; };
 		A37381CF28DDB186006B4B72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExprVisitor.swift; sourceTree = "<group>"; };
 		A3F378F428C4356000F33047 /* SwiftLox */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftLox; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F378F728C4356000F33047 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A3F3790428C43B3D00F33047 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */,
 				A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */,
 				A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */,
+				A39F53F9298B8C07006A7ACF /* ExprVisitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
