@@ -8,6 +8,25 @@
 import Foundation
 
 protocol Expr { }
+// MARK: Grammar
+/*:
+ # Grammar
+ expression     → literal
+                | unary
+                | binary
+                | grouping ;
+
+ literal        → NUMBER | STRING | "true" | "false" | "nil" ;
+ grouping       → "(" expression ")" ;
+ unary          → ( "-" | "!" ) expression ;
+ binary         → expression operator expression ;
+ operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
+                | "+"  | "-"  | "*" | "/" ;
+ 
+ # Notes
+ - CAPITALISED terminals are single lexme whose representation may vary (eg. NUMBER can be 42, 1, etc.)
+ - Recursive (eg. `binary` production contains `expression`, which can again contain `binary`)
+ */
 
 // MARK: Concrete Types
 struct BinaryExpr: Expr {
