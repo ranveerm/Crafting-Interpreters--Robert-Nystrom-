@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Token {
+/// ``Token`` is generic over ``LexmeGroup`` and hence can not effectively be used in a `Collection` (which has numerous use cases, eg. passing a collection of ``Token`` objects for parsing). As a result, the below abstraction is created.
 protocol AbstractToken: CustomStringConvertible {
     associatedtype Group: LexmeGroup
     var lexmeGroup: Group { get }
@@ -28,6 +28,11 @@ extension AbstractToken {
     }
 }
 
+// MARK: Concrete Type
+/// This type is generic over `LexmeGroup` as implementing `polymorphism` is not semantically valid (given `lexmeGroup` is immutable).
+struct Token<T: LexmeGroup>: AbstractToken {
+    let lexmeGroup: T
+    var literal: String?
     let line: Int
 }
 
@@ -35,11 +40,5 @@ extension AbstractToken {
 extension Token: Equatable {
     static func == (lhs: Token, rhs: Token) -> Bool {
         lhs.lexme == rhs.lexme && lhs.literal == rhs.literal && lhs.line == rhs.line
-    }
-}
-
-extension Token: CustomStringConvertible {
-    var description: String {
-        "[\(line)] " + tokenType.description + "\t\t" + lexme + "\t\t" + (literal ?? "")
     }
 }
