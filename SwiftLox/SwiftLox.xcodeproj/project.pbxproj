@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A30B7818292AF356002CD1BF /* Expr.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30B7817292AF356002CD1BF /* Expr.swift */; };
+		A31BB18B29A8687C00D82B94 /* LexmeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31BB18A29A8687C00D82B94 /* LexmeGroup.swift */; };
+		A31BB18D29A8688900D82B94 /* NonTokenInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31BB18C29A8688900D82B94 /* NonTokenInputs.swift */; };
+		A31BB18E29A869C400D82B94 /* NonTokenInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31BB18C29A8688900D82B94 /* NonTokenInputs.swift */; };
+		A31BB18F29A869C800D82B94 /* LexmeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31BB18A29A8687C00D82B94 /* LexmeGroup.swift */; };
+		A328369B29AC9E780006AFA1 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
 		A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355E2B02921FB88007FF810 /* ScannerTests.swift */; };
 		A355E2B22921FB94007FF810 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD51572920BE6D00C4D488 /* Scanner.swift */; };
 		A355E2B32921FBD8007FF810 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
-		A355E2B42921FBDB007FF810 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* TokenType.swift */; };
-		A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
+		A355E2B42921FBDB007FF810 /* Lexme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* Lexme.swift */; };
 		A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A37381D028DDB186006B4B72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37381CF28DDB186006B4B72 /* Token.swift */; };
 		A39F53F2298A5D2E006A7ACF /* ExprVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39F53F1298A5D2E006A7ACF /* ExprVisitor.swift */; };
@@ -24,7 +28,7 @@
 		A3F378F828C4356000F33047 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F378F728C4356000F33047 /* main.swift */; };
 		A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790428C43B3D00F33047 /* ConsoleIO.swift */; };
 		A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790828C43B7700F33047 /* MainProgram.swift */; };
-		A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* TokenType.swift */; };
+		A3F3790B28CA200D00F33047 /* Lexme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F3790A28CA200D00F33047 /* Lexme.swift */; };
 		A3FD51582920BE6D00C4D488 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FD51572920BE6D00C4D488 /* Scanner.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		A30B7817292AF356002CD1BF /* Expr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expr.swift; sourceTree = "<group>"; };
+		A31BB18729A83A3700D82B94 /* LexmeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexmeTests.swift; sourceTree = "<group>"; };
+		A31BB18A29A8687C00D82B94 /* LexmeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexmeGroup.swift; sourceTree = "<group>"; };
+		A31BB18C29A8688900D82B94 /* NonTokenInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonTokenInputs.swift; sourceTree = "<group>"; };
 		A355E2A92921FB79007FF810 /* SwiftLoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A355E2B02921FB88007FF810 /* ScannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTests.swift; sourceTree = "<group>"; };
 		A37381CF28DDB186006B4B72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -52,7 +59,7 @@
 		A3F378F728C4356000F33047 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A3F3790428C43B3D00F33047 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
 		A3F3790828C43B7700F33047 /* MainProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProgram.swift; sourceTree = "<group>"; };
-		A3F3790A28CA200D00F33047 /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
+		A3F3790A28CA200D00F33047 /* Lexme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexme.swift; sourceTree = "<group>"; };
 		A3FD51572920BE6D00C4D488 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,9 +90,20 @@
 			path = Parsing;
 			sourceTree = "<group>";
 		};
+		A31BB18929A8685100D82B94 /* Lexme */ = {
+			isa = PBXGroup;
+			children = (
+				A3F3790A28CA200D00F33047 /* Lexme.swift */,
+				A31BB18C29A8688900D82B94 /* NonTokenInputs.swift */,
+				A31BB18A29A8687C00D82B94 /* LexmeGroup.swift */,
+			);
+			path = Lexme;
+			sourceTree = "<group>";
+		};
 		A355E2AA2921FB79007FF810 /* SwiftLoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				A31BB18729A83A3700D82B94 /* LexmeTests.swift */,
 				A355E2B02921FB88007FF810 /* ScannerTests.swift */,
 				A39F53F6298B8AEB006A7ACF /* ASTPrinterTests.swift */,
 			);
@@ -95,7 +113,7 @@
 		A37381CE28DDB163006B4B72 /* Scanning */ = {
 			isa = PBXGroup;
 			children = (
-				A3F3790A28CA200D00F33047 /* TokenType.swift */,
+				A31BB18929A8685100D82B94 /* Lexme */,
 				A37381CF28DDB186006B4B72 /* Token.swift */,
 				A3FD51572920BE6D00C4D488 /* Scanner.swift */,
 			);
@@ -232,15 +250,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A39F53FA298B8C0C006A7ACF /* Expr.swift in Sources */,
+				A31BB18E29A869C400D82B94 /* NonTokenInputs.swift in Sources */,
+				A31BB18F29A869C800D82B94 /* LexmeGroup.swift in Sources */,
 				A355E2B32921FBD8007FF810 /* Token.swift in Sources */,
-				A355E2B42921FBDB007FF810 /* TokenType.swift in Sources */,
+				A355E2B42921FBDB007FF810 /* Lexme.swift in Sources */,
 				A355E2B22921FB94007FF810 /* Scanner.swift in Sources */,
 				A355E2B62921FC06007FF810 /* ConsoleIO.swift in Sources */,
 				A355E2B12921FB88007FF810 /* ScannerTests.swift in Sources */,
-				A355E2B52921FC01007FF810 /* MainProgram.swift in Sources */,
 				A39F53F7298B8AEB006A7ACF /* ASTPrinterTests.swift in Sources */,
+				A31BB18829A83A3700D82B94 /* LexmeTests.swift in Sources */,
 				A39F53F8298B8C04006A7ACF /* ASTPrinter.swift in Sources */,
 				A39F53F9298B8C07006A7ACF /* ExprVisitor.swift in Sources */,
+				A328369B29AC9E780006AFA1 /* MainProgram.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,11 +271,13 @@
 			files = (
 				A3F3790928C43B7700F33047 /* MainProgram.swift in Sources */,
 				A37381D028DDB186006B4B72 /* Token.swift in Sources */,
-				A3F3790B28CA200D00F33047 /* TokenType.swift in Sources */,
+				A31BB18D29A8688900D82B94 /* NonTokenInputs.swift in Sources */,
+				A3F3790B28CA200D00F33047 /* Lexme.swift in Sources */,
 				A30B7818292AF356002CD1BF /* Expr.swift in Sources */,
 				A39F53F5298B1A1C006A7ACF /* ASTPrinter.swift in Sources */,
 				A3F378F828C4356000F33047 /* main.swift in Sources */,
 				A39F53F2298A5D2E006A7ACF /* ExprVisitor.swift in Sources */,
+				A31BB18B29A8687C00D82B94 /* LexmeGroup.swift in Sources */,
 				A3FD51582920BE6D00C4D488 /* Scanner.swift in Sources */,
 				A3F3790528C43B3D00F33047 /* ConsoleIO.swift in Sources */,
 			);
