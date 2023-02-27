@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ASTPrinter: ExprVisitor {
-    func print(_ expr: Expr) -> String { expr.acceptVisitor(self) }
+struct ASTPrinter {
+    func print(_ expr: Expr) -> String { try! expr.acceptVisitor(self) }
 }
 
 extension ASTPrinter {
@@ -20,7 +20,7 @@ extension ASTPrinter {
         
         for expr in exprs {
             builder.append(" ")
-            builder.append(expr.acceptVisitor(self))
+            builder.append(try! expr.acceptVisitor(self))
         }
         
         builder.append(")")
@@ -29,13 +29,13 @@ extension ASTPrinter {
     }
 }
 
-extension ASTPrinter {
+extension ASTPrinter: ExprVisitor {
     func visitBinaryExpr(expr: BinaryExpr) -> String {
-        parenthesize(name: expr.operator.rawValue, expr.lhs, expr.rhs)
+        parenthesize(name: expr.operator.lexme.rawValue, expr.lhs, expr.rhs)
     }
     
     func visitUnaryExpr(expr: UnaryExpr) -> String {
-        parenthesize(name: expr.operator.rawValue, expr.rhs)
+        parenthesize(name: expr.operator.lexme.rawValue, expr.rhs)
     }
     
     func visitGroupingExpr(expr: GroupingExpr) -> String {
@@ -44,7 +44,6 @@ extension ASTPrinter {
     }
     
     func visitLiteralExpr(expr: LiteralExpr) -> String {
-        if expr.value.isEmpty { return "Emtpy Literal" }
-        else { return expr.value }
+        expr.literal.description
     }
 }

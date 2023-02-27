@@ -36,11 +36,11 @@ extension MainProgram {
         default:
             consoleIO.writeMessage("Input: \(input)")
             
+            consoleIO.writeMessage("--- Scanning ---")
             let scanner = Scanner(input)
             do {
-                let tokens = try scanner.scanForTokens()
-                consoleIO.writeMessage("Tokens:")
-                consoleIO.writeMessage(tokens.reduce("") { $0 + "\n\t" + $1.description })
+                try scanner.scanForTokens()
+                consoleIO.writeMessage(scanner.description)
             } catch {
                 hadError = true
                 if let error = error as? ErrorType {
