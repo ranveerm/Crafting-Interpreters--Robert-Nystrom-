@@ -15,8 +15,8 @@ import Foundation
 protocol ExprVisitor {
     associatedtype VisitorReturnType
     
-    func visitBinaryExpr(expr: BinaryExpr) -> VisitorReturnType
-    func visitUnaryExpr(expr: UnaryExpr) -> VisitorReturnType
-    func visitGroupingExpr(expr: GroupingExpr) -> VisitorReturnType
-    func visitLiteralExpr(expr: LiteralExpr) -> VisitorReturnType
+    func visitBinaryExpr(expr: BinaryExpr) throws -> VisitorReturnType
+    func visitUnaryExpr(expr: UnaryExpr) throws -> VisitorReturnType
+    func visitGroupingExpr(expr: GroupingExpr) throws -> VisitorReturnType
+    func visitLiteralExpr(expr: LiteralExpr) throws -> VisitorReturnType
 }
