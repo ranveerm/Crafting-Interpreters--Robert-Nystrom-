@@ -9,7 +9,7 @@ import Foundation
 
 class Scanner {
     private let source: String
-    private(set) var tokens = [Token]()
+    private(set) var tokens = [any AbstractToken]()
     
     private lazy var startIndex = source.startIndex
     private lazy var currentIndex = source.startIndex
@@ -21,7 +21,7 @@ class Scanner {
 }
 
 extension Scanner {
-    func scanForTokens() throws -> [Token] {
+    @discardableResult func scanForTokens() throws -> [any AbstractToken] {
         initialiseStateForScanning()
         
         if !source.isEmpty {
@@ -32,7 +32,7 @@ extension Scanner {
             }
         }
         
-        tokens.append(Token(tokenType: SpecialToken.eof, lexme: "", literal: nil, line: line))
+        tokens.append(Token(lexmeGroup: LexmeEndSignifier.eof, line: line))
         return tokens
     }
     
@@ -43,20 +43,21 @@ extension Scanner {
         line = 1
     }
     
+    private var lexmeFromCurrentChar: Lexme? { Lexme(rawValue: currentChar.asString) }
     private func scanToken() throws {
         /*:
          Note: Alternative pattern- `case _ where SingleCharToken.rawTokens.contains(currentChar):`
          */
-        if let tokenType = SingleCharToken(rawValue: currentChar.asString) {
-            addToken(type: tokenType)
-        } else if let tokenType = PotentiallyMuliCharOperatorToken(rawValue: currentChar.asString) {
-            if nextCharMatches(PotentiallyMuliCharOperatorToken.succeedingTokenRawForMultiCharOperator) {
+        if let singleCharLexme = lexmeFromCurrentChar?.checkMembership(for: LexmeSingleChar.self) {
+            addToken(for: singleCharLexme)
+        } else if let potentiallyMuliCharOperatorLexme = lexmeFromCurrentChar?.checkMembership(for: LexmePotentiallyMuliCharOperator.self) {
+            if nextCharMatches(LexmePotentiallyMuliCharOperator.succeedingRawCharForMultiCharOperator) {
                 advanceCurrentIndex()
-                addToken(type: tokenType.matchingMultiCharOperator)
-            } else { addToken(type: tokenType) }
-        } else if let tokenType = SpecialOperatorToken(rawValue: currentChar.asString) {
+                addToken(for: potentiallyMuliCharOperatorLexme.matchingMultiCharOperator)
+            } else { addToken(for: potentiallyMuliCharOperatorLexme) }
+        } else if let specialOperatorLexme = lexmeFromCurrentChar?.checkMembership(for: LexmeSpecialOperator.self) {
             /// Comment
-            if nextCharMatches(SpecialOperatorToken.slash.rawValue) {
+            if nextCharMatches(LexmeSpecialOperator.commentStart) {
                 /// Note that while `isAtEnd` is checked prior to invoking `scanToken` in `scanForTokens`, the below loop also advances `currentIndex`, for which reason this condition needs to be evaluated again.
             commentLoop: while !isAtEnd() {
                     switch peekAtNextChar().asString {
@@ -67,19 +68,19 @@ extension Scanner {
                     default: advanceCurrentIndex()
                     }
                 }
-            } else { addToken(type: tokenType) }
+            } else { addToken(for: specialOperatorLexme) }
         } else if let nonToken = NonTokenInputs(rawValue: currentChar.asString) {
             switch nonToken {
             case .newLine: line += 1
             default: break
             }
-        } else if currentChar.asString == Literals.string.rawValue {
+        } else if lexmeFromCurrentChar?.rawValue == LexmeLiteral.stringTerminals {
             /// String Literals
             var newLinesInLiteral = 0
             
             /// Opening `"`
             advanceCurrentIndex()
-            while !isAtEnd() && peekAtNextChar().asString != Literals.string.rawValue {
+            while !isAtEnd() && peekAtNextChar().asString != LexmeLiteral.stringTerminals {
                 if peekAtNextChar().asString == NonTokenInputs.newLine.rawValue { newLinesInLiteral += 1 }
                 advanceCurrentIndex()
             }
@@ -90,13 +91,13 @@ extension Scanner {
             advanceCurrentIndex()
             let literalStartIndex = source.index(after: startIndex)
             let stringLiteral = source[literalStartIndex..<currentIndex]
-            addToken(type: Literals.string, literal: String(stringLiteral))
+            addToken(for: LexmeLiteral.string.groupForToken, literal: String(stringLiteral))
             
             line += newLinesInLiteral
         } else if currentChar.isNumber {
             /// Numeric Literals
             advanceUntilNextCharIsNotDigit()
-            if peekAtNextChar().asString == SingleCharToken.dot.rawValue {
+            if peekAtNextChar().asString == LexmeLiteral.numericDecimalSeparator {
                 advanceCurrentIndex()
                 /// Require at least 1 number after decimal point
                 guard isNextCharANumber else { throw MainProgram.ErrorType.unexpectedChar(line)  }
@@ -106,21 +107,24 @@ extension Scanner {
             let numberLiteral = literalFromIndicies
             /// Pre-emptively checking if literal can be converted to a double precision floating point
             if Double(numberLiteral) == nil { throw MainProgram.ErrorType.unableToDetermineNumber(line) }
-            addToken(type: Literals.number, literal: numberLiteral)
+            addToken(for: LexmeLiteral.number.groupForToken, literal: numberLiteral)
         } else if isCharStartOfAnIdentifier(currentChar) {
             /// Identifiers- matched using **maximal munch principle**, to ensure it recieves preference over keywords
             advanceUntilNextCharIsNotAnIdentifier()
-            if let keyword = keywordFromIndicies { addToken(type: keyword) }
-            else { addToken(type: Literals.identifier, literal: literalFromIndicies) }
+            if let lexmeKeyword = keywordFromIndicies { addToken(for: lexmeKeyword) }
+            else { addToken(for: LexmeLiteral.identifier, literal: literalFromIndicies) }
+        } else if let endSignifierLexme  = lexmeFromCurrentChar?.checkMembership(for: LexmeEndSignifier.self) {
+            // TODO: Determine course of action if `eof` is part of input
+            addToken(for: endSignifierLexme, literal: nil)
         } else { throw MainProgram.ErrorType.unexpectedChar(line) }
     }
     
-    private func addToken(type tokenType: TokenType) {
-        addToken(type: tokenType, literal: nil)
+    private func addToken<T: LexmeGroup>(for lexmeGroup: T) {
+        addToken(for: lexmeGroup, literal: nil)
     }
     
-    private func addToken(type tokenType: TokenType, literal: String?) {
-        let tokenToAdd = Token(tokenType: tokenType, lexme: literalFromIndicies, literal: literal, line: line)
+    private func addToken<T: LexmeGroup>(for lexmeGroup: T, literal: String?) {
+        let tokenToAdd = Token(lexmeGroup: lexmeGroup, literal: literal, line: line)
         tokens.append(tokenToAdd)
     }
     
@@ -153,9 +157,20 @@ extension Scanner {
     private func isNextCharPartOfAnIdentifier() -> Bool { isNextCharANumber || isCharStartOfAnIdentifier(peekAtNextChar()) }
     private func advanceUntilNextCharIsNotAnIdentifier() { while !isAtEnd() && isNextCharPartOfAnIdentifier() { advanceCurrentIndex() } }
     private var literalFromIndicies: String { String(source[startIndex...currentIndex]) }
-    private var keywordFromIndicies: Keyword? { Keyword(rawValue: literalFromIndicies) }
+    private var keywordFromIndicies: LemeKeyword? { Lexme(rawValue: literalFromIndicies)?.checkMembership(for: LemeKeyword.self) }
 }
 
 fileprivate extension Character {
     var asString: String { String(self) }
+}
+
+extension Scanner: CustomStringConvertible {
+    private var leadingPadding: String { "".padding(toLength: 4, withPad: " ", startingAt: 0) }
+    
+    var description: String {
+        let header = leadingPadding + "Line".padding(toLength: 6, withPad: " ", startingAt: 0) + "Description".padding(toLength: 29, withPad: " ", startingAt: 0) + "Lexme\n"
+        let headerDivider = leadingPadding + String(repeating: "-", count: 40) + "\n"
+        let tokensPrinted: String = tokens.reduce("") { $0 + leadingPadding + $1.description + "\n" }
+        return "Token:\n" + header + headerDivider + tokensPrinted
+    }
 }

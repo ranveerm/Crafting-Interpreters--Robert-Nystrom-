@@ -8,58 +8,41 @@
 import Foundation
 
 /**
- Container to server as a mechanism to group concrete expression types.
- - Note: There is no specification for state or method specific to the concept of expression as this protocol purely serves as a grouping mechanism. However, it does act as an Visitor interface for expression types (see [Visitor Pattern](https://refactoring.guru/design-patterns/visitor) for more details).
+ Container to server as a mechanism to **group** concrete expression types.
+ - Note: There is no specification for state or method as the concept of expression by this protocol purely serves as a grouping mechanism. However, it does act as an Visitor interface for expression types (see [Visitor Pattern](https://refactoring.guru/design-patterns/visitor) for more details).
  */
 protocol Expr {
-    func acceptVisitor<T: ExprVisitor>(_ visitor: T) -> T.VisitorReturnType
+    func acceptVisitor<T: ExprVisitor>(_ visitor: T) throws -> T.VisitorReturnType
 }
 
-// MARK: Grammar
-/*:
- # Grammar
- expression     → literal
-                | unary
-                | binary
-                | grouping ;
-
- literal        → NUMBER | STRING | "true" | "false" | "nil" ;
- grouping       → "(" expression ")" ;
- unary          → ( "-" | "!" ) expression ;
- binary         → expression operator expression ;
- operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
-                | "+"  | "-"  | "*" | "/" ;
- 
- # Notes
- - CAPITALISED terminals are single lexme whose representation may vary (eg. NUMBER can be 42, 1, etc.)
- - Recursive (eg. `binary` production contains `expression`, which can again contain `binary`)
- */
-
 // MARK: Concrete Types
+
 struct BinaryExpr: Expr {
     let lhs: Expr
     let rhs: Expr
-    let `operator`: TokenType
+    let `operator`: Token<LexmeBinaryOperator>
     
-    func acceptVisitor<T>(_ visitor: T) -> T.VisitorReturnType where T : ExprVisitor { visitor.visitBinaryExpr(expr: self) }
+    func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitBinaryExpr(expr: self) }
 }
 
 struct UnaryExpr: Expr {
-    let `operator`: TokenType
+    let `operator`: Token<LexmeUnaryOperator>
     let rhs: Expr
     
-    func acceptVisitor<T>(_ visitor: T) -> T.VisitorReturnType where T : ExprVisitor { visitor.visitUnaryExpr(expr: self) }
+    func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitUnaryExpr(expr: self) }
 }
 
+// Todo: Determine if tokens for `(` and `)` need to be stored (currently they are discarded)
 struct GroupingExpr: Expr {
     let expr: Expr
     
-    func acceptVisitor<T>(_ visitor: T) -> T.VisitorReturnType where T : ExprVisitor { visitor.visitGroupingExpr(expr: self) }
+    func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitGroupingExpr(expr: self) }
 }
 
-struct LiteralExpr: Expr {
-    let type: Literals
-    let value: String
+/// **Syntax tree node**
+struct LiteralExpr: Expr, Equatable {
+    let type: Token<LexmeProductionTerminal>
+    let literal: String
     
-    func acceptVisitor<T>(_ visitor: T) -> T.VisitorReturnType where T : ExprVisitor { visitor.visitLiteralExpr(expr: self) }
+    func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitLiteralExpr(expr: self) }
 }

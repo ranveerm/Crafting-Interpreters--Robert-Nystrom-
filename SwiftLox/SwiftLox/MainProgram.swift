@@ -36,16 +36,25 @@ extension MainProgram {
         default:
             consoleIO.writeMessage("Input: \(input)")
             
+            consoleIO.writeMessage("--- Scanning ---")
             let scanner = Scanner(input)
             do {
-                let tokens = try scanner.scanForTokens()
-                consoleIO.writeMessage("Tokens:")
-                consoleIO.writeMessage(tokens.reduce("") { $0 + "\n\t" + $1.description })
+                try scanner.scanForTokens()
+                consoleIO.writeMessage(scanner.description)
             } catch {
                 hadError = true
                 if let error = error as? ErrorType {
                     reportError(line: error.reportedErrorLine, errorType: error)
                 } else { consoleIO.writeMessage("Unknown error", to: .error) }
+            }
+            
+            consoleIO.writeMessage("--- Parsing ---")
+            let parser = Parser(scanner.tokens)
+            let expressions = parser.parse()
+            parser.errors.forEach { consoleIO.writeMessage($0.localizedDescription, to: .error) }
+            if !expressions.isEmpty {
+                consoleIO.writeMessage("AST:")
+                expressions.forEach { consoleIO.writeMessage(ASTPrinter().print($0)) }
             }
         }
     }

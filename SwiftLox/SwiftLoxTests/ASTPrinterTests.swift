@@ -16,13 +16,13 @@ final class ASTPrinterTests: XCTestCase {
         /// Given
         let expectedOutput = "(* (- 123) (group 42.67))"
         let printer = ASTPrinter()
-        let expression = BinaryExpr(lhs: UnaryExpr(operator: SingleCharToken(rawValue: "-")!,
-                                                   rhs: LiteralExpr(type: .number, value: "123")),
-                                    rhs: GroupingExpr(expr: LiteralExpr(type: .number, value: "42.67")),
-                                    operator: SingleCharToken(rawValue: "*")!)
+        let expression = BinaryExpr(lhs: UnaryExpr(operator: Token(lexmeGroup: LexmeUnaryOperator.minus, line: 1),
+                                                   rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, line: 1), literal: "123")),
+                                    rhs: GroupingExpr(expr: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, line: 1), literal: "42.67")),
+                                    operator: Token(lexmeGroup: LexmeBinaryOperator.star, line: 1))
         
         /// When
-        let computedOutptut = expression.acceptVisitor(printer)
+        let computedOutptut = try expression.acceptVisitor(printer)
         
         /// Then
         XCTAssertEqual(expectedOutput, computedOutptut)
