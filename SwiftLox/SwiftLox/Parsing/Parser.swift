@@ -13,7 +13,7 @@ import Foundation
     - Top-down parser- parsing is started at the outermost/top ("widest scope") grammar rule
  */
 class Parser {
-    private var tokens: [any AbstractToken]
+    private let tokens: [any AbstractToken]
     public var errors = [Parser.Error]()
     /// Signifies the index for the next toke to consume
     private var nextTokenIndex = 0
@@ -24,7 +24,7 @@ class Parser {
 }
 
 extension Parser {
-    public func parse() -> [Expr] {
+    func parse() -> [Expr] {
         var expressions = [Expr]()
         
         while !isAtEnd {
@@ -197,7 +197,7 @@ extension Parser {
     }
     
     /// Tokens discarded until a statement boundary is deemed to be found.
-    func synchronise() {
+    private func synchronise() {
         advance()
         
         while !isAtEnd {
