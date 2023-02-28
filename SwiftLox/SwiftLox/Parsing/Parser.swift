@@ -182,7 +182,7 @@ extension Parser {
         guard let lexmeGroup = peek.lexme.checkMembership(for: lexmeGroupType) else { return nil }
         advance()
         
-        return Token(lexmeGroup: lexmeGroup, literal: peek.literal, line: peek.line)
+        return Token(lexmeGroup: lexmeGroup, literal: currentlyConsumedToken.literal, line: currentlyConsumedToken.line)
     }
     
     // TODO: Optimise
@@ -190,7 +190,7 @@ extension Parser {
         for lexmeGroup in lexmeGroupCollection {
             if peek.lexme == lexmeGroup.lexme {
                 advance()
-                return Token(lexmeGroup: lexmeGroup, literal: peek.literal, line: peek.line)
+                return Token(lexmeGroup: lexmeGroup, literal: currentlyConsumedToken.literal, line: currentlyConsumedToken.line)
             }
         }
         return nil
