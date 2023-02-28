@@ -2,14 +2,15 @@
 This repository works through the content presented within [Crafting Interpreters](https://craftinginterpreters.com) (by Robert Nystrom). The implementation however is purely in Swift.
 
 # Grammar
-|Metasyntax |Production  |
-|---|---|
-|expression   | -> literal \| unary \| binary \| grouping |
-|literal   | -> NUMBER \| STRING \| "true"  \| "false" \| "nil" |
-|grouping   | -> "(" expression ")" |
-|unary   | ("-"\|"!") expression  |
-|binary   | expression operator expression |
-|operator   | "==" \| "!=" \| "<" \| "<=" \| ">" \| ">=" \| "+" \| "-" \| "*" \| "/" |
+```
+ expression     → equality ;                                                              Lower         Top
+ equality       → comparison ( ( "!=" | "==" ) comparison )* ;                              ▲            ▲
+ comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;                              │            │
+ term           → factor ( ( "-" | "+" ) factor )* ;                                   Precedence     Grammar
+ factor         → unary ( ( "/" | "*" ) unary )* ;                                          │            │
+ unary          → ( "!" | "-" ) unary | primary ;                                           ▼            ▼
+ primary        → NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" ;      Higher       Bottom
+```
 
 - Quoted strings specify terminals that correspond to a lexme
 - CAPITALISED words represent lexmes whose actual value is variable (eg. STRING corresponds to a string literal)
