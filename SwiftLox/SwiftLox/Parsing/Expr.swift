@@ -40,7 +40,7 @@ struct GroupingExpr: Expr {
 }
 
 /// **Syntax tree node**
-struct LiteralExpr: Expr {
+struct LiteralExpr: Expr, Equatable {
     let type: Token<LexmeProductionTerminal>
     let literal: String
     
