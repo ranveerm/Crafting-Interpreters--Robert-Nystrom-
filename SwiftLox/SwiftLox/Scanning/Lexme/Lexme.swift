@@ -117,7 +117,7 @@ enum Lexme: String, CaseIterable, Equatable {
         case .greaterEqual: return [LexmeMultiCharOperator.greaterEqual, LexmeBinaryOperator.greaterEqual]
         case .lessEqual: return [LexmeMultiCharOperator.lessEqual, LexmeBinaryOperator.lessEqual]
             
-        case .identifier: return [LexmeLiteral.identifier]
+        case .identifier: return [LexmeLiteral.identifier, LexmeProductionTerminal.identifier]
         case .string: return [LexmeLiteral.string, LexmeProductionTerminal.string]
         case .number: return [LexmeLiteral.number, LexmeProductionTerminal.number]
             

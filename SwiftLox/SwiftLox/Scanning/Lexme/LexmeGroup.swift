@@ -42,17 +42,6 @@ enum LexmeSingleChar: LexmeGroup {
         case .star: return .star
         }
     }
-//    
-//    var convertedForParsing: LexmeGroup {
-//        switch self {
-//        case .leftParenthesis: return LexmeProductionTerminal.leftParenthesis
-//        case .rightParenthesis: return LexmeEndSignifier.rightParenthesis
-//        case .leftBrace, .rightBrace, .comma, .dot: return self
-//        case .minus: return .minus
-//        case .plus: return .plus
-//        case .star: return .star
-//        }
-//    }
 }
 
 enum LexmePotentiallyMuliCharOperator: LexmeGroup {
@@ -120,9 +109,9 @@ enum LexmeLiteral: LexmeGroup {
         }
     }
     
-    var groupForToken: any LexmeGroup {
+    var groupForToken: LexmeProductionTerminal {
         switch self {
-        case .identifier: return self
+        case .identifier: return LexmeProductionTerminal.identifier
         case .string: return LexmeProductionTerminal.string
         case .number: return LexmeProductionTerminal.number
         }
@@ -247,7 +236,7 @@ enum LexmeSynchronisation: LexmeGroup {
 
 /// Lexmes that represent **leaves of sytax tree**. These are terminals in the production symbols.
 enum LexmeProductionTerminal: LexmeGroup {
-    case `true`, `false`, `nil`, number, string, leftParenthesis
+    case `true`, `false`, `nil`, number, string, leftParenthesis, identifier
     
     var lexme: Lexme {
         switch self {
@@ -257,6 +246,7 @@ enum LexmeProductionTerminal: LexmeGroup {
         case .number: return .number
         case .string: return .string
         case .leftParenthesis: return .leftParenthesis
+        case .identifier: return .identifier
         }
     }
 }
