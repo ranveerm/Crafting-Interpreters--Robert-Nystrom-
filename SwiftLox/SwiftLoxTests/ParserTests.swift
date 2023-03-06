@@ -22,8 +22,8 @@ final class ParserTests: XCTestCase {
             Token(lexmeGroup: LexmeEndSignifier.eof, line: lineNumber)
         ]
         let expectedExpr = BinaryExpr(
-            lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "4", line: lineNumber), literal: "4"),
-            rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "2", line: lineNumber), literal: "2"),
+            lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "4", line: lineNumber)),
+            rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "2", line: lineNumber)),
             operator: Token(lexmeGroup: LexmeBinaryOperator.plus, line: lineNumber)
         )
         
@@ -59,12 +59,12 @@ final class ParserTests: XCTestCase {
             Token(lexmeGroup: LexmeEndSignifier.eof, line: lineNumber)
         ]
         let expectedExpr = BinaryExpr(
-            lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "12", line: lineNumber), literal: "12"),
+            lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "12", line: lineNumber)),
             rhs: GroupingExpr(expr: BinaryExpr(
-                lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "345", line: lineNumber), literal: "345"),
+                lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "345", line: lineNumber)),
                 rhs: BinaryExpr(
-                    lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "6789", line: lineNumber), literal: "6789"),
-                    rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.string, literal: "mock", line: lineNumber), literal: "mock"),
+                    lhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "6789", line: lineNumber)),
+                    rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.string, literal: "mock", line: lineNumber)),
                     operator: Token(lexmeGroup: LexmeBinaryOperator.star, line: lineNumber)),
                 operator: Token(lexmeGroup: LexmeBinaryOperator.minus, line: lineNumber))),
             operator: Token(lexmeGroup: LexmeBinaryOperator.slash, line: lineNumber))
