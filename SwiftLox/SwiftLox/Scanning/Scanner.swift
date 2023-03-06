@@ -112,18 +112,19 @@ extension Scanner {
             /// Identifiers- matched using **maximal munch principle**, to ensure it recieves preference over keywords
             advanceUntilNextCharIsNotAnIdentifier()
             if let lexmeKeyword = keywordFromIndicies { addToken(for: lexmeKeyword) }
-            else { addToken(for: LexmeLiteral.identifier, literal: literalFromIndicies) }
+            else { addToken(for: LexmeLiteral.identifier.groupForToken, literal: literalFromIndicies) }
         } else if let endSignifierLexme  = lexmeFromCurrentChar?.checkMembership(for: LexmeEndSignifier.self) {
             // TODO: Determine course of action if `eof` is part of input
-            addToken(for: endSignifierLexme, literal: nil)
+            addToken(for: endSignifierLexme)
         } else { throw MainProgram.ErrorType.unexpectedChar(line) }
     }
     
     private func addToken<T: LexmeGroup>(for lexmeGroup: T) {
-        addToken(for: lexmeGroup, literal: nil)
+        let tokenToAdd = Token(lexmeGroup: lexmeGroup, line: line)
+        tokens.append(tokenToAdd)
     }
     
-    private func addToken<T: LexmeGroup>(for lexmeGroup: T, literal: String?) {
+    private func addToken(for lexmeGroup: LexmeProductionTerminal, literal: String) {
         let tokenToAdd = Token(lexmeGroup: lexmeGroup, literal: literal, line: line)
         tokens.append(tokenToAdd)
     }

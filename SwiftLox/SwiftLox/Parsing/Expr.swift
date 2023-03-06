@@ -39,10 +39,11 @@ struct GroupingExpr: Expr {
     func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitGroupingExpr(expr: self) }
 }
 
-/// **Syntax tree node**
+// Todo: determine if there is value in `literal` property when `type.literal` (in ``Token`` object) contains the same value. In addition, there is no synchronisation mechanism between these values.
+/// **Syntax tree node**, forming the atomic component that all other expressions are composed from.
 struct LiteralExpr: Expr, Equatable {
     let type: Token<LexmeProductionTerminal>
-    let literal: String
+    var literal: String { type.literal }
     
     func acceptVisitor<T>(_ visitor: T) throws -> T.VisitorReturnType where T : ExprVisitor { try visitor.visitLiteralExpr(expr: self) }
 }

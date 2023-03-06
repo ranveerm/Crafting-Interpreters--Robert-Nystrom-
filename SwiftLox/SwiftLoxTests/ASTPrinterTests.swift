@@ -14,11 +14,11 @@ final class ASTPrinterTests: XCTestCase {
     
     func test_ASTPrinter() throws {
         /// Given
-        let expectedOutput = "(* (- 123) (group 42.67))"
+        let expectedOutput = "(* (- 123.0) (group 42.67))"
         let printer = ASTPrinter()
         let expression = BinaryExpr(lhs: UnaryExpr(operator: Token(lexmeGroup: LexmeUnaryOperator.minus, line: 1),
-                                                   rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, line: 1), literal: "123")),
-                                    rhs: GroupingExpr(expr: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, line: 1), literal: "42.67")),
+                                                   rhs: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "123", line: 1))),
+                                    rhs: GroupingExpr(expr: LiteralExpr(type: Token(lexmeGroup: LexmeProductionTerminal.number, literal: "42.67", line: 1))),
                                     operator: Token(lexmeGroup: LexmeBinaryOperator.star, line: 1))
         
         /// When

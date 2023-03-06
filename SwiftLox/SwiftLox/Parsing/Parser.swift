@@ -108,8 +108,7 @@ extension Parser {
             
             return GroupingExpr(expr: groupedExpr)
         default:
-            guard let literalValue = currentlyConsumedToken.literal else { throw Error(errorType: .literalValueNotPresentInToken, line: currentlyParsedLine) }
-            return LiteralExpr(type: primaryGroupingToken, literal: literalValue)
+            return LiteralExpr(type: primaryGroupingToken)
         }
     }
 }
@@ -179,18 +178,20 @@ extension Parser {
     /// **Important**- The below methods handle matching tokens with specified inputs (with either `LexmeGroup.Type` or ``LexmeGroup`` instances). A match results in the token being returned. Note however, that the matching criteria isnt based on specialising `Token` to the specified input (eg. `peek as? Token<LexmeBinaryOperator>`). This is because semantics from the scanner might not necessarily match with the semantics of the Parser (for instance, the scanner will deep `+` to be an instance of ``LexmeSingleChar``, while the parser will view this as ``LexmeBinaryOperator``). As a result, `checkMembership` from ``Lexme`` is used to check raw values. This also has the added benefit of leveraging previously defined matching logic.
     
     private func match<T: LexmeGroup>(group lexmeGroupType: T.Type) -> Token<T>? {
-        guard let lexmeGroup = peek.lexme.checkMembership(for: lexmeGroupType) else { return nil }
+        guard let tokenCasted = peek as? Token<T> else { return nil }
         advance()
         
-        return Token(lexmeGroup: lexmeGroup, literal: currentlyConsumedToken.literal, line: currentlyConsumedToken.line)
+        return tokenCasted
     }
     
     // TODO: Optimise
     private func match<T: LexmeGroup>(cases lexmeGroupCollection: [T]) -> Token<T>? {
+        guard let nextTokenGroupCasted = peek.lexme.checkMembership(for: T.self) else { return nil }
+        
         for lexmeGroup in lexmeGroupCollection {
-            if peek.lexme == lexmeGroup.lexme {
+            if nextTokenGroupCasted.lexme == lexmeGroup.lexme {
                 advance()
-                return Token(lexmeGroup: lexmeGroup, literal: currentlyConsumedToken.literal, line: currentlyConsumedToken.line)
+                return Token(lexmeGroup: nextTokenGroupCasted, line: currentlyConsumedToken.line)
             }
         }
         return nil
